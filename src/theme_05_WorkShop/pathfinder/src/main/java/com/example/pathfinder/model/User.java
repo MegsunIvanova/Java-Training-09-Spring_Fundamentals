@@ -3,19 +3,27 @@ package com.example.pathfinder.model;
 import com.example.pathfinder.model.enums.Level;
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "users"
+//        , uniqueConstraints = @UniqueConstraint(columnNames = {"id", "username"})
+    )
+//@IdClass(UserPK.class) //for composite key
+public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    //    @Id
     @Column(nullable = false, unique = true)
     private String username; //Accepts values, which should be at least 2 characters
+
+//    @EmbeddedId //for composite key
+//    private UserPK primaryKey;
 
     @Column(nullable = false)
     private String password; //Accepts values, which should be at least 2 characters
