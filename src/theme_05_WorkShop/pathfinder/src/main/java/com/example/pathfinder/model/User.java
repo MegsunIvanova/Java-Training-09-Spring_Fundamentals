@@ -28,12 +28,12 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password; //Accepts values, which should be at least 2 characters
 
-    @Column(name = "full_name")
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
     private int age;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email; //Accepts values, which contain the '@' symbol
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -44,6 +44,15 @@ public class User implements Serializable {
 
     public User() {
         this.roles = new HashSet<>();
+    }
+
+    public User(String username, String password, String fullName, int age, String email) {
+        this();
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.age = age;
+        this.email = email;
     }
 
     public long getId() {

@@ -1,22 +1,37 @@
 package com.example.pathfinder.model.dto;
 
+import jakarta.validation.constraints.*;
+
 public class UserRegistrationDTO {
 
 
+    @NotEmpty
+    @Size(min = 5, max = 20)
     private String username; //Accepts values, which should be at least 2 characters
 
-    private String fullName;
+    @NotEmpty
+    @Size(min = 5, max = 20)
+    private String fullname;
 
+    @NotEmpty
+    @Email
     private String email;
 
+    @Min(0)
+    @Max(90)
     private int age;
 
+    @NotEmpty
+    @Size(min = 5, max = 20)
     private String password;
 
+    @NotEmpty
+    @Size(min = 5, max = 20)
     private String confirmPassword;
 
     public UserRegistrationDTO() {
     }
+
     public String getUsername() {
         return username;
     }
@@ -26,12 +41,12 @@ public class UserRegistrationDTO {
         return this;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getFullname() {
+        return fullname;
     }
 
-    public UserRegistrationDTO setFullName(String fullName) {
-        this.fullName = fullName;
+    public UserRegistrationDTO setFullname(String fullname) {
+        this.fullname = fullname;
         return this;
     }
 
@@ -75,11 +90,11 @@ public class UserRegistrationDTO {
     public String toString() {
         return "UserRegistrationDTO{" +
                 "username='" + username + '\'' +
-                ", fullName='" + fullName + '\'' +
+                ", fullName='" + fullname + '\'' +
                 ", email='" + email + '\'' +
                 ", age=" + age +
-                ", password='" + password + '\'' +
-                ", confirmPassword='" + confirmPassword + '\'' +
+                ", password='" + password != null ? "exist" : "null" + '\'' +
+                ", confirmPassword='" + confirmPassword != null ? "exist" : "null" + '\'' +
                 '}';
     }
 }
