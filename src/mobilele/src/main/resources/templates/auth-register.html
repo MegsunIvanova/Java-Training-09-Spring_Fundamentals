@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-      <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>MobiLeLeLe</title>
     <link rel="stylesheet" href="/css/reset-css.css"/>
     <link rel="stylesheet" href="/css/bootstrap.min.css"/>
@@ -22,15 +22,15 @@
             th:action="@{/users/register}"
             th:method="post"
             th:object="${userModel}"
-          class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
+            class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="row">
             <div class="form-group col-md-6 mb-3">
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
-                <input  id="firstName"
-                        th:field="*{firstName}"
-                        th:errorclass="is-invalid"
-                        type="text"
-                        class="form-control"
+                <input id="firstName"
+                       th:field="*{firstName}"
+                       th:errorclass="is-invalid"
+                       type="text"
+                       class="form-control"
                        placeholder="First name"/>
                 <p class="invalid-feedback errors alert alert-danger">
                     First name is required and should be between 2 and 20 symbols.
@@ -59,7 +59,9 @@
                        class="form-control"
                        placeholder="User name"/>
                 <p class="invalid-feedback errors alert alert-danger">
-                    Email is required and should be valid.
+                    <span th:each="err : ${#fields.errors('email')}"
+                          th:text="${err}"
+                    />
                 </p>
             </div>
             <div class="form-group col-md-6 mb-3">
@@ -76,23 +78,30 @@
             </div>
             <div class="form-group col-md-6 mb-3">
                 <label for="confirmPassword" class="text-white font-weight-bold">Confirm Password</label>
-                <input id="confirmPassword" name="confirmPassword" type="password" class="form-control"
+                <input
+                        id="confirmPassword"
+                        th:field="*{confirmPassword}"
+                        th:errorclass="is-invalid"
+                        type="password"
+                        min="2"
+                        max="20"
+                        class="form-control"
                        placeholder="Password"/>
                 <p class="invalid-feedback errors alert alert-danger">
-                    Password should match.
+                    Passwords should match.
                 </p>
             </div>
         </div>
-<!--        <div class="form-group">-->
-<!--            <label class="text-center text-white font-weight-bold" for="roles">Roles</label>-->
-<!--            <select  id="roles" class="form-control" multiple>-->
-<!--                <option>-->
-<!--                </option>-->
-<!--            </select>-->
-<!--            <p class="errors alert alert-danger">-->
-<!--                Selecting a role is required.-->
-<!--            </p>-->
-<!--        </div>-->
+        <!--        <div class="form-group">-->
+        <!--            <label class="text-center text-white font-weight-bold" for="roles">Roles</label>-->
+        <!--            <select  id="roles" class="form-control" multiple>-->
+        <!--                <option>-->
+        <!--                </option>-->
+        <!--            </select>-->
+        <!--            <p class="errors alert alert-danger">-->
+        <!--                Selecting a role is required.-->
+        <!--            </p>-->
+        <!--        </div>-->
 
         <div class="row">
             <div class="col col-md-4">
@@ -105,7 +114,7 @@
 </div>
 
 <div>
-     <footer> </footer>
+    <footer></footer>
 </div>
 
 </body>

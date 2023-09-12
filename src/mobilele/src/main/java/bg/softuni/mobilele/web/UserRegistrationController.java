@@ -39,6 +39,7 @@ public class UserRegistrationController {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("userModel", userModel);
+
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.userModel",
                     bindingResult);
@@ -50,6 +51,4 @@ public class UserRegistrationController {
 
         return "redirect:/";
     }
-
-    //TODO: Explain POST-redirect-GET
 }
