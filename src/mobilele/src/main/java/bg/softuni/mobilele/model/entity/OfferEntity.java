@@ -74,6 +74,7 @@ public class OfferEntity {
         return this;
     }
 
+
     public String getImageUrl() {
         return imageUrl;
     }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "brand")
+@Table(name = "brands")
 public class BrandEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)

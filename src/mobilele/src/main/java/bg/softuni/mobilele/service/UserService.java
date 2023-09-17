@@ -53,7 +53,7 @@ public class UserService {
         boolean success = passwordEncoder.matches(rawPassword, encodedPassword);
 
         if (success) {
-            login(userOpt.get());
+            this.login(userOpt.get());
         } else {
             logout();
         }
@@ -63,6 +63,7 @@ public class UserService {
 
     private void login(UserEntity userEntity) {
         currentUser.setLoggedIn(true).
+                setEmail(userEntity.getEmail()).
                 setName(userEntity.getFirstName() + " " + userEntity.getLastName());
     }
 

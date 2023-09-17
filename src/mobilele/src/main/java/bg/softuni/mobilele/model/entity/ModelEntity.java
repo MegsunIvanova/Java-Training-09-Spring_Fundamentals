@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "model")
+@Table(name = "models")
 public class ModelEntity extends BaseEntity {
 
     @Column(nullable = false)
