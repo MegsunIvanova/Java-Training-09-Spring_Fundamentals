@@ -5,10 +5,14 @@ spring:
     username: root
     password: "123456"
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: create-drop
     defer-datasource-initialization:  true
+#  mvc:
+#    hiddenmethod:
+#      filter:
+#        enabled: true
   # sql.init.mode -> for initializing the DB
   sql:
     init:

@@ -24,7 +24,8 @@ public class UserController {
 
     @ModelAttribute("userModel")
     public UserLoginDTO initUserModel() {
-        return new UserLoginDTO();
+        //TODO: how to return UserLoginDTO with empty fields
+        return new UserLoginDTO("", "");
     }
 
     @GetMapping("/login")

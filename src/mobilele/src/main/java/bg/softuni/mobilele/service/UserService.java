@@ -40,14 +40,14 @@ public class UserService {
     }
 
     public boolean login(UserLoginDTO loginDTO) {
-        Optional<UserEntity> userOpt = userRepository.findByEmail(loginDTO.getUsername());
+        Optional<UserEntity> userOpt = userRepository.findByEmail(loginDTO.username());
 
         if (userOpt.isEmpty()) {
-            LOGGER.debug("User with name [{}] not found.", loginDTO.getUsername());
+            LOGGER.debug("User with name [{}] not found.", loginDTO.username());
             return false;
         }
 
-        var rawPassword = loginDTO.getPassword();
+        var rawPassword = loginDTO.password();
         var encodedPassword = userOpt.get().getPassword();
 
         boolean success = passwordEncoder.matches(rawPassword, encodedPassword);

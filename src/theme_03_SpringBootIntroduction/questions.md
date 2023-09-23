@@ -23,3 +23,11 @@
 
 7. Само на Java се пишат спринг приложения?
     не
+
+8. Какво е IoC и DI? Какво е Spring IoC контейнер? 
+9. Има ли разлика между Spring Boot и Spring MVC?
+10. Какво е Spring Boot Starter?
+11. Какво е Spring Boot Autoconfiguration?
+12. Какво е Spring Boot Actuator?
+13. Как може да създадем един Spring Boot проект?
+14. Дайте примери за няколко Spring Starter-а?
