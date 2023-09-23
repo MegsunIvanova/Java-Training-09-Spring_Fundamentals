@@ -29,7 +29,7 @@
    [protocol]://[subdomain].[domain name]:[port]/[path]?[query]#[fragment]
    example: https://www.hostinger.com:80/videoplay?docid=720&hl=en#00h02m30s
 
-6. Каква е разликата между URI и URL
+6. Каква е разликата между URI и URL?
    URL са подмножество на URI
    URI identifies a resource and differentiates it from others by using a name, location, or both. URL identifies the web address or location of a unique resource. URI contains components like a scheme, authority, path, and query.
 
@@ -37,3 +37,9 @@
 
 8. Какво представлява модел POST-redirect-GET и защо се използва?
    It is used to prevent the resubmission of a form caused by reloading the same web page after submitting the form. It removes redundancy of content to strengthen the SEO and makes the website user friendly.
+
+9. Избройте някои по-често срещани HTTP status-и?
+
+10. Какви недостатъци има HTTP/2?
+
+11. Каквo представлява HTTP/3?
