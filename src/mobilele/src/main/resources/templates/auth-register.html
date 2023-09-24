@@ -14,7 +14,7 @@
 
 <body>
 
-<div th:replace="fragments/navbar">Navbar</div>
+<div th:replace="~{fragments/navbar}">Navbar</div>
 
 <div class="container">
     <h2 class="text-center text-white">Register User</h2>
@@ -27,6 +27,7 @@
             <div class="form-group col-md-6 mb-3">
                 <label for="firstName" class="text-white font-weight-bold">First Name</label>
                 <input id="firstName"
+                       name="firstName"
                        th:field="*{firstName}"
                        th:errorclass="is-invalid"
                        type="text"
@@ -50,14 +51,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6 mb-3">
+            <div class="form-group col-md-12 mb-3">
                 <label for="email" class="text-white font-weight-bold">Email</label>
                 <input id="email"
                        th:field="*{email}"
                        th:errorclass="is-invalid"
                        type="text"
                        class="form-control"
-                       placeholder="User name"/>
+                       placeholder="Email"/>
                 <p class="invalid-feedback errors alert alert-danger">
                     <span th:each="err : ${#fields.errors('email')}"
                           th:text="${err}"
@@ -83,10 +84,8 @@
                         th:field="*{confirmPassword}"
                         th:errorclass="is-invalid"
                         type="password"
-                        min="2"
-                        max="20"
                         class="form-control"
-                       placeholder="Password"/>
+                        placeholder="Password"/>
                 <p class="invalid-feedback errors alert alert-danger">
                     Passwords should match.
                 </p>
