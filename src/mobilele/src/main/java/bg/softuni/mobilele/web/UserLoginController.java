@@ -13,11 +13,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/users")
-public class UserController {
+public class UserLoginController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    public UserLoginController(UserService userService) {
         this.userService = userService;
     }
 

@@ -2,7 +2,6 @@ package bg.softuni.mobilele.model.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -21,8 +20,8 @@ public class UserEntity extends BaseEntity {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "is_active")
-    private boolean isActive;
+    @Column
+    private boolean active;
 
     @Column(name = "image_url")
     private String imageURL;
@@ -67,11 +66,11 @@ public class UserEntity extends BaseEntity {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public UserEntity setActive(boolean active) {
-        isActive = active;
+        this.active = active;
         return this;
     }
 
@@ -105,7 +104,7 @@ public class UserEntity extends BaseEntity {
                 ", password='" + password + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", isActive=" + isActive +
+                ", isActive=" + active +
                 ", imageURL='" + imageURL + '\'' +
                 ", userRoles=" + userRoles +
                 '}';

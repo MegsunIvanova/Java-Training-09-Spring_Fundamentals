@@ -1,10 +1,11 @@
-package bg.softuni.mobilele.service;
+package bg.softuni.mobilele.service.impl;
 
 import bg.softuni.mobilele.model.dto.UserLoginDTO;
 import bg.softuni.mobilele.model.dto.UserRegisterDTO;
 import bg.softuni.mobilele.model.entity.UserEntity;
 import bg.softuni.mobilele.model.mapper.UserMapper;
 import bg.softuni.mobilele.repository.UserRepository;
+import bg.softuni.mobilele.service.UserService;
 import bg.softuni.mobilele.user.CurrentUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +22,8 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository userRepository, CurrentUser currentUser, PasswordEncoder passwordEncoder, UserMapper userMapper) {
+    public UserServiceImpl(UserRepository userRepository, CurrentUser currentUser,
+                           PasswordEncoder passwordEncoder, UserMapper userMapper) {
         this.userRepository = userRepository;
         this.currentUser = currentUser;
         this.passwordEncoder = passwordEncoder;
@@ -38,6 +40,15 @@ public class UserServiceImpl implements UserService {
         login(newUser);
 
     }
+
+//    private UserEntity map (UserRegisterDTO userRegisterDTO) {
+//        return new UserEntity()
+//                .setActive(true)
+//                .setFirstName(userRegisterDTO.getFirstName())
+//                .setLastName(userRegisterDTO.getLastName())
+//                .setEmail(userRegisterDTO.getEmail())
+//                .setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
+//    }
 
     @Override
     public boolean login(UserLoginDTO loginDTO) {

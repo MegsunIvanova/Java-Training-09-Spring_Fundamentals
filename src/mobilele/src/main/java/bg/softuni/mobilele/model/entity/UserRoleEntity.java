@@ -5,25 +5,26 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "roles")
-public class UserRoleEntity {
+public class UserRoleEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+
     private String name;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRoleEnum role;
 
-    public Long getId() {
-        return id;
-    }
-
-    public UserRoleEntity setId(Long id) {
-        this.id = id;
-        return this;
-    }
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public UserRoleEntity setId(Long id) {
+//        this.id = id;
+//        return this;
+//    }
 
     public String getName() {
         return name;
@@ -46,7 +47,7 @@ public class UserRoleEntity {
     @Override
     public String toString() {
         return "UserRoleEntity{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", name='" + name + '\'' +
                 ", role=" + role +
                 '}';

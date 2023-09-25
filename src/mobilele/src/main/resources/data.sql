@@ -1,6 +1,6 @@
-INSERT INTO users (id, email, first_name, last_name, image_url, is_active, password)
+INSERT INTO users (id, email, first_name, last_name, image_url, active, password)
 VALUES (1, 'lachezar.balev@gmail.com', 'Lucho', 'Balev', null, 1,
-        'cf0a19ad8dd509b105b77230c832cfb66541849cfeaf648cc88e5374734afee3774febc7cf6487fe');
+        '26bf518d364cf1df9426e6c6f8d2f56b862f9d1d6e2a285dc5512be4f97c2dde5dded32ebb6dad0abd1c0db3c0502576');
 
 INSERT INTO brands (id, name)
 VALUES (1, 'Ford'),
