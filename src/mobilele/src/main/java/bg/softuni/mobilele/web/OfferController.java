@@ -1,15 +1,19 @@
 package bg.softuni.mobilele.web;
 
-import bg.softuni.mobilele.model.dto.AddOfferDTO;
+import bg.softuni.mobilele.model.dto.CreateOfferDTO;
 import bg.softuni.mobilele.service.BrandService;
 import bg.softuni.mobilele.service.OfferService;
+import bg.softuni.mobilele.service.impl.OfferServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.UUID;
 
 @Controller
 public class OfferController {
@@ -17,7 +21,7 @@ public class OfferController {
     private final OfferService offerService;
     private final BrandService brandService;
 
-    public OfferController(OfferService offerService, BrandService brandService) {
+    public OfferController(OfferServiceImpl offerService, BrandService brandService) {
         this.offerService = offerService;
         this.brandService = brandService;
     }
@@ -30,7 +34,7 @@ public class OfferController {
     @GetMapping("/offers/add")
     public String addOffer(Model model) {
         if (!model.containsAttribute("addOfferModel")) {
-            model.addAttribute("addOfferModel", new AddOfferDTO());
+            model.addAttribute("addOfferModel", new CreateOfferDTO());
         }
 
         model.addAttribute("brands", this.brandService.getAllBrands());
@@ -39,7 +43,7 @@ public class OfferController {
     }
 
     @PostMapping("/offers/add")
-    public String addOffer(@Valid AddOfferDTO addOfferModel,
+    public String addOffer(@Valid CreateOfferDTO addOfferModel,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
 
@@ -51,9 +55,15 @@ public class OfferController {
             return "redirect:/offers/add";
         }
 
-        this.offerService.addOffer(addOfferModel);
+        this.offerService.createOffer(addOfferModel);
 
         return "redirect:/offers/all";
+    }
+
+    @GetMapping("offers/{uuid}/details")
+    public String details(@PathVariable("uuid") UUID uuid) {
+        return "details";
+
     }
 }
 

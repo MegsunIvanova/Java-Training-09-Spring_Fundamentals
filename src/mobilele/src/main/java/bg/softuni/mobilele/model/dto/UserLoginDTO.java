@@ -1,10 +1,10 @@
 package bg.softuni.mobilele.model.dto;
 
-public record UserLoginDTO(String username, String password) {
+public record UserLoginDTO(String email, String password) {
     @Override
     public String toString() {
         return "UserLoginDTO{" +
-                "username='" + username + '\'' +
+                "email='" + email + '\'' +
                 ", password='" + (password != null ? "[PROVIDED]" : null) + '\'' +
                 '}';
     }

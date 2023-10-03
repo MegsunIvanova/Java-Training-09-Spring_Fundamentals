@@ -12,7 +12,7 @@ public class Route {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     //    @Lob
     @Column(name = "gpx_coordinates", columnDefinition = "LONGTEXT")

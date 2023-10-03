@@ -49,6 +49,6 @@ public class UserRegistrationController {
 
         userService.registerUser(userModel);
 
-        return "redirect:/";
+        return "redirect:/users/login";
     }
 }

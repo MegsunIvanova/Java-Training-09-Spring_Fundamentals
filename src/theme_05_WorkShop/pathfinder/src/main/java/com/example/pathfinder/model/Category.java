@@ -9,12 +9,13 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(nullable = false, unique = true)
     @Enumerated(EnumType.STRING)
     private RouteCategory name;
 
+//    @Lob
     @Column(columnDefinition = "TEXT")
     private String description;
 

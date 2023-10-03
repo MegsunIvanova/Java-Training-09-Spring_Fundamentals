@@ -6,13 +6,11 @@ import bg.softuni.mobilele.model.entity.UserEntity;
 import bg.softuni.mobilele.model.mapper.UserMapper;
 import bg.softuni.mobilele.repository.UserRepository;
 import bg.softuni.mobilele.service.UserService;
-import bg.softuni.mobilele.user.CurrentUser;
+import bg.softuni.mobilele.util.CurrentUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -37,51 +35,39 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
 
         this.userRepository.save(newUser);
-        login(newUser);
-
     }
 
-//    private UserEntity map (UserRegisterDTO userRegisterDTO) {
-//        return new UserEntity()
-//                .setActive(true)
-//                .setFirstName(userRegisterDTO.getFirstName())
-//                .setLastName(userRegisterDTO.getLastName())
-//                .setEmail(userRegisterDTO.getEmail())
-//                .setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
-//    }
-
     @Override
-    public boolean login(UserLoginDTO loginDTO) {
-        Optional<UserEntity> userOpt = userRepository.findByEmail(loginDTO.username());
+    public boolean loginUser(UserLoginDTO userLoginDTO) {
+        UserEntity userEntity = userRepository.findByEmail(userLoginDTO.email())
+                .orElse(null);
 
-        if (userOpt.isEmpty()) {
-            LOGGER.debug("User with name [{}] not found.", loginDTO.username());
-            return false;
+        boolean loginSuccess = false;
+
+        if (userEntity != null) {
+
+            String rawPassword = userLoginDTO.password();
+            String encodedPassword = userEntity.getPassword();
+
+            loginSuccess = encodedPassword != null &&
+                    this.passwordEncoder.matches(rawPassword, encodedPassword);
+
+            if (loginSuccess) {
+                currentUser.setLogged(true)
+                        .setEmail(userEntity.getEmail())
+                        .setFirstName(userEntity.getFirstName())
+                        .setLastName(userEntity.getLastName());
+            } else {
+                currentUser.logout();
+            }
         }
 
-        var rawPassword = loginDTO.password();
-        var encodedPassword = userOpt.get().getPassword();
 
-        boolean success = passwordEncoder.matches(rawPassword, encodedPassword);
-
-        if (success) {
-            this.login(userOpt.get());
-        } else {
-            logout();
-        }
-
-        return success;
+        return loginSuccess;
     }
 
     @Override
-    public void login(UserEntity userEntity) {
-        currentUser.setLoggedIn(true).
-                setEmail(userEntity.getEmail()).
-                setName(userEntity.getFirstName() + " " + userEntity.getLastName());
-    }
-
-    @Override
-    public void logout() {
-        currentUser.clear();
+    public void logoutUser() {
+        currentUser.logout();
     }
 }

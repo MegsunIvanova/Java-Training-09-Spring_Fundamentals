@@ -5,7 +5,6 @@ import bg.softuni.mobilele.model.enums.TransmissionEnum;
 import jakarta.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
 
 import java.math.BigDecimal;
 import java.sql.Types;
@@ -13,20 +12,20 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "offers")
-public class OfferEntity {
+public class OfferEntity extends BaseEntity {
 
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator
-            (
-                    name = "UUID",
-                    strategy = "org.hibernate.id.UUIDGenerator"
-
-            )
+    //    @Id
+//    @GeneratedValue(generator = "UUID")
+//    @GenericGenerator
+//            (
+//                    name = "UUID",
+//                    strategy = "org.hibernate.id.UUIDGenerator"
+//
+//            )
 //    @Type(type = "uuid-char")
 //    @Column(columnDefinition = "VARCHAR(255)")
     @JdbcTypeCode(Types.VARCHAR)
-    private UUID id;
+    private UUID uuid;
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
@@ -56,12 +55,12 @@ public class OfferEntity {
     private UserEntity seller;
 
 
-    public UUID getId() {
-        return id;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public OfferEntity setId(UUID id) {
-        this.id = id;
+    public OfferEntity setUuid(UUID uuid) {
+        this.uuid = uuid;
         return this;
     }
 
@@ -150,7 +149,8 @@ public class OfferEntity {
     @Override
     public String toString() {
         return "OfferEntity{" +
-                "id=" + id +
+                "id=" + getId() +
+                "uuid" + uuid +
                 ", engine=" + engine +
                 ", imageUrl='" + imageUrl + '\'' +
                 ", mileage=" + mileage +

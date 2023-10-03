@@ -4,9 +4,7 @@ import bg.softuni.mobilele.model.enums.EngineEnum;
 import bg.softuni.mobilele.model.enums.TransmissionEnum;
 import jakarta.validation.constraints.*;
 
-import java.math.BigDecimal;
-
-public class AddOfferDTO {
+public class CreateOfferDTO {
 
     @NotNull
     @Min(1)
@@ -35,7 +33,7 @@ public class AddOfferDTO {
         return modelId;
     }
 
-    public AddOfferDTO setModelId(Long modelId) {
+    public CreateOfferDTO setModelId(Long modelId) {
         this.modelId = modelId;
         return this;
     }
@@ -44,7 +42,7 @@ public class AddOfferDTO {
         return price;
     }
 
-    public AddOfferDTO setPrice(Integer price) {
+    public CreateOfferDTO setPrice(Integer price) {
         this.price = price;
         return this;
     }
@@ -53,7 +51,7 @@ public class AddOfferDTO {
         return engine;
     }
 
-    public AddOfferDTO setEngine(EngineEnum engine) {
+    public CreateOfferDTO setEngine(EngineEnum engine) {
         this.engine = engine;
         return this;
     }
@@ -62,7 +60,7 @@ public class AddOfferDTO {
         return transmission;
     }
 
-    public AddOfferDTO setTransmission(TransmissionEnum transmission) {
+    public CreateOfferDTO setTransmission(TransmissionEnum transmission) {
         this.transmission = transmission;
         return this;
     }
@@ -71,7 +69,7 @@ public class AddOfferDTO {
         return year;
     }
 
-    public AddOfferDTO setYear(Integer year) {
+    public CreateOfferDTO setYear(Integer year) {
         this.year = year;
         return this;
     }
@@ -80,7 +78,7 @@ public class AddOfferDTO {
         return description;
     }
 
-    public AddOfferDTO setDescription(String description) {
+    public CreateOfferDTO setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -89,7 +87,7 @@ public class AddOfferDTO {
         return imageUrl;
     }
 
-    public AddOfferDTO setImageUrl(String imageUrl) {
+    public CreateOfferDTO setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
         return this;
     }

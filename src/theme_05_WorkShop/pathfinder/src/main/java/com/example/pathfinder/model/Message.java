@@ -10,7 +10,7 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     @Column(name = "date_time", nullable = false)
     private LocalDateTime dateTime;

@@ -16,11 +16,11 @@
             th:object="${userModel}"
             class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">
         <div class="form-group">
-            <label for="username" class="text-white font-weight-bold">Username</label>
+            <label for="email" class="text-white font-weight-bold">Username</label>
             <input
-                    th:field="*{username}"
+                    th:field="*{email}"
                     th:errorclass="is-invalid"
-                    id="username"
+                    id="email"
                     type="text"
                     min="2"
                     max="50"

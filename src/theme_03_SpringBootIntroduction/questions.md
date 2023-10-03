@@ -25,7 +25,9 @@
     не
 
 8. Какво е IoC и DI? Какво е Spring IoC контейнер? 
+    - Inversion Of Comtrol (IoC) е когато някаъв framework (напр. Spring) иземва контрола, който преди ние сме упражнявали при създаване на някакъв обект и инжектира dependencies-ta за нас в конструктура напр.
 9. Има ли разлика между Spring Boot и Spring MVC?
+   - Sprin Boot e някакъв начин на за сетъпване на 
 10. Какво е Spring Boot Starter?
 11. Какво е Spring Boot Autoconfiguration?
 12. Какво е Spring Boot Actuator?
