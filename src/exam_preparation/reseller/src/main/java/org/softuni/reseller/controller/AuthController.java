@@ -40,9 +40,12 @@ public class AuthController {
     }
 
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
         if (this.userService.isUserLoggedIn()) {
+
             HomeModelDTO homeModelDTO = userService.createHomeModelDTO();
+
+            model.addAttribute("homeModel", homeModelDTO);
 
             return "home";
         } else {
@@ -52,13 +55,21 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        return "login";
+        if (!this.userService.isUserLoggedIn()) {
+            return "login";
+        } else {
+            return "redirect:/";
+        }
     }
 
     @PostMapping("/login")
     public String login(@Valid UserLoginDTO loginDTO,
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes) {
+
+        if (this.userService.isUserLoggedIn()) {
+            return "redirect:/";
+        }
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
@@ -84,6 +95,10 @@ public class AuthController {
 
     @GetMapping("/register")
     public String register() {
+        if (this.userService.isUserLoggedIn()) {
+            return "redirect:/";
+        }
+
         return "register";
     }
 
@@ -91,6 +106,10 @@ public class AuthController {
     public String register(@Valid UserRegisterDTO registrationDTO,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
+
+        if (this.userService.isUserLoggedIn()) {
+            return "redirect:/";
+        }
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("registrationDTO", registrationDTO);
@@ -106,9 +125,11 @@ public class AuthController {
 
     @GetMapping("/logout")
     public String logout() {
+        if (!this.userService.isUserLoggedIn()) {
+            return "redirect:/";
+        }
+
         this.userService.logout();
         return "redirect:/";
     }
-
-
 }

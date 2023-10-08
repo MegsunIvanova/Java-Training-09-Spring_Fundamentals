@@ -14,6 +14,7 @@ import org.softuni.reseller.util.UserSession;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OfferServiceImpl implements OfferService {
@@ -62,11 +63,19 @@ public class OfferServiceImpl implements OfferService {
         User seller = offer.getSeller();
 
         seller.getOffers().remove(offer);
+        offer.setSeller(null);
         offer.setBuyer(buyer);
         buyer.getBoughtOffers().add(offer);
 
         this.offerRepository.save(offer);
         this.userRepository.saveAll(List.of(seller, buyer));
 
+    }
+
+    @Override
+    public void removeOffer(Long id) {
+        Offer toDelete = this.offerRepository.findById(id)
+                .orElseThrow();
+        this.offerRepository.delete(toDelete);
     }
 }

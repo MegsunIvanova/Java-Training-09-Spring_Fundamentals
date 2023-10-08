@@ -9,8 +9,8 @@ public class OfferDTO {
     private Long id;
     private String description;
     private BigDecimal price;
-    private User sellerUsername;
-    private User buyerUsername;
+    private String sellerUsername;
+    private String buyerUsername;
     private String conditionName;
 
     public OfferDTO() {
@@ -43,20 +43,20 @@ public class OfferDTO {
         return this;
     }
 
-    public User getSellerUsername() {
+    public String getSellerUsername() {
         return sellerUsername;
     }
 
-    public OfferDTO setSellerUsername(User sellerUsername) {
+    public OfferDTO setSellerUsername(String sellerUsername) {
         this.sellerUsername = sellerUsername;
         return this;
     }
 
-    public User getBuyerUsername() {
+    public String getBuyerUsername() {
         return buyerUsername;
     }
 
-    public OfferDTO setBuyerUsername(User buyerUsername) {
+    public OfferDTO setBuyerUsername(String buyerUsername) {
         this.buyerUsername = buyerUsername;
         return this;
     }

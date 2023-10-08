@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="~{fragments/commons::head}"></head>
 <body>
-<header th:replace="fragments/commons::nav"></header>
+<header th:replace="~{fragments/commons::nav}"></header>
 <main>
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add offer</span></h1>
     <hr class="hr-3 w-25 bg-white"/>
 
     <form class="mx-auto w-25 bg-blur rounded"
           th:method="POST"
-          th:action="@{/offer-add}"
+          th:action="@{/offer/add}"
           th:object="${addOfferDTO}">
 
         <div class="form-group">
@@ -53,7 +53,7 @@
 <!--                <option value="GOOD">Good</option>-->
 <!--                <option value="ACCEPTABLE">Acceptable</option>-->
                 <option th:each="e : ${T(org.softuni.reseller.model.enums.ConditionNameEnum).values()}"
-                        th:text="${e}"
+                        th:text="${#strings.capitalize(#strings.toLowerCase(e))}"
                         th:value="${e}"
                         th:selected="${e} == *{condition}"></option>
 
