@@ -2,10 +2,11 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Pathfinder</title>
-    <th:block th:include="/fragments/head"/>
+    <th:block th:insert="~{/fragments/head}"/>
 </head>
 <body>
-<th:block th:include="/fragments/header"/>
+<!-- Navigation -->
+<th:block th:insert="~{/fragments/header}"/>
 
 <main class="p-5 align-content-center bg-blur my-register-div">
     <h1 class="    border-bottom mb-5">Login</h1>
@@ -14,8 +15,8 @@
         <div class="row g-3 align-items-center">
 
             <form
-                    action="/"
-                    method="">
+                    th:action="@{/users/login}"
+                    th:method="POST">
                 <div>
                     <div class="col-auto">
                         <label for="inputUsername" class="col-form-label ">Username</label>
@@ -49,6 +50,6 @@
 
     </div>
 </main>
-<th:block th:include="/fragments/footer"/>
+<th:block th:insert="~{/fragments/footer}"/>
 </body>
 </html>

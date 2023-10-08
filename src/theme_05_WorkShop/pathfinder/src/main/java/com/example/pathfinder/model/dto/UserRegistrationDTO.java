@@ -2,99 +2,100 @@ package com.example.pathfinder.model.dto;
 
 import jakarta.validation.constraints.*;
 
-public class UserRegistrationDTO {
+import java.util.Objects;
 
+public final class UserRegistrationDTO {
+        @NotEmpty
+        @Size(min = 5, max = 20)
+        private String username; //Accepts values, which should be at least 2 characters
 
-    @NotEmpty
-    @Size(min = 5, max = 20)
-    private String username; //Accepts values, which should be at least 2 characters
+        @NotEmpty
+        @Size(min = 5, max = 20)
+        private String fullName;
 
-    @NotEmpty
-    @Size(min = 5, max = 20)
-    private String fullname;
+        @NotEmpty
+        @Email
+        private String email;
 
-    @NotEmpty
-    @Email
-    private String email;
+        @Min(0)
+        @Max(90)
+        private int age;
 
-    @Min(0)
-    @Max(90)
-    private int age;
+        @NotEmpty
+        @Size(min = 5, max = 20)
+        private String password;
 
-    @NotEmpty
-    @Size(min = 5, max = 20)
-    private String password;
+        @NotEmpty
+        @Size(min = 5, max = 20)
+        private String confirmPassword;
 
-    @NotEmpty
-    @Size(min = 5, max = 20)
-    private String confirmPassword;
+        public UserRegistrationDTO() {
+        }
 
-    public UserRegistrationDTO() {
-    }
+        public String getUsername() {
+                return username;
+        }
 
-    public String getUsername() {
-        return username;
-    }
+        public UserRegistrationDTO setUsername(String username) {
+                this.username = username;
+                return this;
+        }
 
-    public UserRegistrationDTO setUsername(String username) {
-        this.username = username;
-        return this;
-    }
+        public String getFullName() {
+                return fullName;
+        }
 
-    public String getFullname() {
-        return fullname;
-    }
+        public UserRegistrationDTO setFullName(String fullName) {
+                this.fullName = fullName;
+                return this;
+        }
 
-    public UserRegistrationDTO setFullname(String fullname) {
-        this.fullname = fullname;
-        return this;
-    }
+        public String getEmail() {
+                return email;
+        }
 
-    public String getEmail() {
-        return email;
-    }
+        public UserRegistrationDTO setEmail(String email) {
+                this.email = email;
+                return this;
+        }
 
-    public UserRegistrationDTO setEmail(String email) {
-        this.email = email;
-        return this;
-    }
+        public int getAge() {
+                return age;
+        }
 
-    public int getAge() {
-        return age;
-    }
+        public UserRegistrationDTO setAge(int age) {
+                this.age = age;
+                return this;
+        }
 
-    public UserRegistrationDTO setAge(int age) {
-        this.age = age;
-        return this;
-    }
+        public String getPassword() {
+                return password;
+        }
 
-    public String getPassword() {
-        return password;
-    }
+        public UserRegistrationDTO setPassword(String password) {
+                this.password = password;
+                return this;
+        }
 
-    public UserRegistrationDTO setPassword(String password) {
-        this.password = password;
-        return this;
-    }
+        public String getConfirmPassword() {
+                return confirmPassword;
+        }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
+        public UserRegistrationDTO setConfirmPassword(String confirmPassword) {
+                this.confirmPassword = confirmPassword;
+                return this;
+        }
 
-    public UserRegistrationDTO setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-        return this;
-    }
+        @Override
+        public String toString() {
+                return "UserRegistrationDTO{" +
+                        "username='" + username + '\'' +
+                        ", fullName='" + fullName + '\'' +
+                        ", email='" + email + '\'' +
+                        ", age=" + age +
+                        ", password='" + password != null ? "exist" : "null" + '\'' +
+                        ", confirmPassword='" + confirmPassword != null ? "exist" : "null" + '\'' +
+                        '}';
+        }
 
-    @Override
-    public String toString() {
-        return "UserRegistrationDTO{" +
-                "username='" + username + '\'' +
-                ", fullName='" + fullname + '\'' +
-                ", email='" + email + '\'' +
-                ", age=" + age +
-                ", password='" + password != null ? "exist" : "null" + '\'' +
-                ", confirmPassword='" + confirmPassword != null ? "exist" : "null" + '\'' +
-                '}';
-    }
 }

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="~{fragments/commons::head}"></head>
 <body>
-<header th:replace="fragments/commons::nav"></header>
+<header th:replace="~{fragments/commons::nav}"></header>
 <main>
     <div class="container bg-blur rounded mt-1 mb-4">
         <div class="row mt-1 mb-2">
@@ -11,15 +11,15 @@
                 <div>
                     <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">My Offers</h3>
                     <h6 class="mySticky bg-gray text-dark  mb-0 mt-0">Username: <span
-                            th:text="${@userSession.username}"></span></h6>
+                            th:text="${homeModel.loggedUsername}"></span></h6>
                     <div class="bg-dark rounded m-auto" style="height: 31vh; overflow: auto">
                         <table class="table table-striped table-dark">
-                            <tr th:each="item : ${@userSession.offers}">
+                            <tr th:each="item : ${homeModel.offers}">
                                 <td class="bg-info" scope="row" style="width: 5%">
                                     <img class="mr-2 " src="/img/etiquette.png" alt="Etiquette" width="35px"
                                          height="35px">
                                 </td>
-                                <td style="width: 5%" class="bg-info" th:text="${item.condition.name}">{condition}</td>
+                                <td style="width: 5%" class="bg-info" th:text="${item.conditionName}">{condition}</td>
                                 <td class="bg-primary" style="width: 15%" th:text="${item.price}">{price} €</td>
                                 <td th:text="${item.description}">{description}</td>
                                 <td style="width: 15%"><a class="btn-danger btn" href="/">Remove</a>
@@ -33,7 +33,7 @@
                     <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">Bought Items</h3>
                     <div class="bg-dark rounded m-auto" style="height: 31vh; overflow: auto">
                         <table class="table table-striped table-dark">
-                            <tr th:each="item : ${@userSession.boughtOffers}">
+                            <tr th:each="item : ${homeModel.boughtOffers}">
                                 <td class="bg-info" scope="row" style="width: 5%">
                                     <img class="mr-2 " src="/img/etiquette.png" alt="Etiquette" width="35px"
                                          height="35px">
@@ -53,17 +53,17 @@
             <div class="col-6 mt-1 mb-1">
                 <h3 class="mySticky bg-gray text-dark  mb-0 mt-2">All Other Offers</h3>
                 <h6 class="mySticky bg-gray text-dark  mb-0 mt-0"><span
-                        th:text="${@userSession.otherOffers.size()}"></span> Offers</h6>
+                        th:text="${homeModel.otherOffers.size()}"></span> Offers</h6>
                 <div class="bg-dark rounded m-auto" style="height: 67vh; overflow: auto">
                     <div>
                         <div>
                             <br>
-                            <ul th:each="offer : ${@userSession.otherOffers}" class="list-group list-group-horizontal text-dark">
+                            <ul th:each="offer : ${homeModel.otherOffers}" class="list-group list-group-horizontal text-dark">
                                 <li class="list-group-item">
                                     <table>
                                         <tr>
                                             <td style="width: 35%">
-                                                <a th:text="${offer.seller.username}">{sellersUsername} sells:</a>
+                                                <a th:text="${offer.sellerUsername}">{sellersUsername} sells:</a>
                                             </td>
                                             <td>
                                                 <a th:text="${offer.description}">{offerDescription}</a>
@@ -75,13 +75,13 @@
                                     <table>
                                         <tr>
                                             <td style="width: 40%">
-                                                <a th:text="${offer.condition.name}">Condition: {offerCondition}</a>
+                                                <a th:text="${offer.conditionName}">Condition: {offerCondition}</a>
                                             </td>
                                             <td class="text-primary" style="width: 40%">
                                                 <a>Price: <span th:text="${offer.price}"></span> €</a>
                                             </td>
                                             <td>
-                                                <a class="ml-3 text-danger" href="/">
+                                                <a class="ml-3 text-danger" th:href="@{/offer/{id}/buy(id=${offer.id})}">
                                                     <img src="/img/buy.png" height="35px"></a>
                                             </td>
                                         </tr>
@@ -95,6 +95,6 @@
         </div>
     </div>
 </main>
-<footer th:replace="fragments/commons::footer"></footer>
+<footer th:replace="~{fragments/commons::footer}"></footer>
 </body>
 </html>

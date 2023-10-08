@@ -137,4 +137,8 @@ public class Route {
         this.categories = categories;
         return this;
     }
+
+    public void addCategories(Set<Category> categories) {
+        this.categories.addAll(categories);
+    }
 }

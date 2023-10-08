@@ -1,4 +1,4 @@
-package com.example.pathfinder.web;
+package com.example.pathfinder.controller;
 
 import com.example.pathfinder.model.Route;
 import com.example.pathfinder.service.RouteService;
@@ -22,8 +22,6 @@ public class HomeController {
         Route route = this.routeService.getMostCommented();
 
         model.addAttribute("mostCommented", route);
-
-
 
         return "index";
     }

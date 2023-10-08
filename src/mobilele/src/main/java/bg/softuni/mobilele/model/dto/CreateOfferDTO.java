@@ -5,29 +5,42 @@ import bg.softuni.mobilele.model.enums.TransmissionEnum;
 import jakarta.validation.constraints.*;
 
 public class CreateOfferDTO {
+    @NotEmpty
+    private String description;
+
+    @Positive
+    private Integer mileage;
 
     @NotNull
     @Min(1)
     private Long modelId;
 
     @NotNull
-    @Positive
-    private Integer price;
-    @NotNull
     private EngineEnum engine;
 
     @NotNull
     private TransmissionEnum transmission;
 
+
+    @NotEmpty
+    private String imageUrl;
+
+    @NotNull
+    @Positive
+    private Integer price;
+
     @NotNull
     @Min(1900)
     private Integer year;
 
-    @NotEmpty
-    private String description;
+    public String getDescription() {
+        return description;
+    }
 
-    @NotEmpty
-    private String imageUrl;
+    public CreateOfferDTO setDescription(String description) {
+        this.description = description;
+        return this;
+    }
 
     public Long getModelId() {
         return modelId;
@@ -35,15 +48,6 @@ public class CreateOfferDTO {
 
     public CreateOfferDTO setModelId(Long modelId) {
         this.modelId = modelId;
-        return this;
-    }
-
-    public Integer getPrice() {
-        return price;
-    }
-
-    public CreateOfferDTO setPrice(Integer price) {
-        this.price = price;
         return this;
     }
 
@@ -65,6 +69,24 @@ public class CreateOfferDTO {
         return this;
     }
 
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public CreateOfferDTO setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+        return this;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public CreateOfferDTO setPrice(Integer price) {
+        this.price = price;
+        return this;
+    }
+
     public Integer getYear() {
         return year;
     }
@@ -74,21 +96,12 @@ public class CreateOfferDTO {
         return this;
     }
 
-    public String getDescription() {
-        return description;
+    public Integer getMileage() {
+        return mileage;
     }
 
-    public CreateOfferDTO setDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public CreateOfferDTO setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public CreateOfferDTO setMileage(Integer mileage) {
+        this.mileage = mileage;
         return this;
     }
 }

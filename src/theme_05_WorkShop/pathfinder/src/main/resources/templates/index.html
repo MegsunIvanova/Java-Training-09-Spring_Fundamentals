@@ -3,12 +3,12 @@
 
 <head>
     <title>Pathfinder</title>
-    <th:block th:include="~{/fragments/head}"/>
+    <th:block th:insert="~{/fragments/head}"/>
 </head>
 <body>
 <div class="wrapper">
     <!-- Navigation -->
-    <th:block th:include="~{/fragments/header}"/>
+    <th:block th:insert="~{/fragments/header}"/>
     <!-- Top Container -->
     <section class="top-container">
         <div class="showcase">
@@ -84,7 +84,7 @@
     <!-- <script th:src="@{/js/weather.js}"></script> -->
 </div>
 <!-- Wrapper Ends -->'
-<th:block th:include="/fragments/footer"/>
+<th:block th:insert="~{/fragments/footer}"/>
 
 </body>
 

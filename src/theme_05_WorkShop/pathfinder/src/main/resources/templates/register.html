@@ -6,17 +6,17 @@
     <th:block th:include="~{/fragments/head}"/>
 </head>
 <body>
-<th:block th:include="~{/fragments/header}"/>
+<!-- Navigation -->
+<th:block th:insert="~{/fragments/header}"/>
 
 <main class="p-5 align-content-center bg-blur my-register-div">
     <h1 class="border-bottom">Register</h1>
     <div class="d-flex justify-content-center ">
         <div class="row g-3">
             <form
-                    th:action="@{/register}"
-                    th:method="post"
-                    th:object="${userRegistrationDTO}"
-            >
+                    th:action="@{/users/register}"
+                    th:method="POST"
+                    th:object="${userRegistrationDTO}">
                 <div>
                     <div class="col-auto">
                         <label for="inputUsername" class="col-form-label ">Username</label>
@@ -24,6 +24,7 @@
                     <div class="col-auto">
                         <input name="username"
                                th:field="*{username}"
+                               th:errorclass="is-invalid"
                                required minlength="5" maxlength="20"
                                type="text"
                                id="inputUsername"
@@ -34,7 +35,7 @@
                             characters</small>
 
                         <small id="usernameUniqueError"
-                               class=" bg-danger rounded">Username is already occupied</small>
+                               class="invalid-feedback bg-danger rounded">Username is already occupied</small>
 
                     </div>
                 </div>
@@ -44,8 +45,8 @@
                         <label for="inputFullName" class="col-form-label ">Full Name</label>
                     </div>
                     <div class="col-auto">
-                        <input name="fullname"
-                               th:field="*{fullname}"
+                        <input name="fullName"
+                               th:field="*{fullName}"
                                th:errorclass="is-invalid"
                                required minlength="5" maxlength="20"
                                type="text"
@@ -65,13 +66,12 @@
                     <div class="col-auto">
                         <input name="email"
                                th:field="*{email}"
-
+                               th:errorclass="is-invalid"
                                type="email"
                                id="inputEmail"
                                class="form-control"
                                aria-describedby="emailHelpInline">
-                        <small th:if="${#fields.hasErrors('email')}"
-                                id="emailError"
+                        <small id="emailError"
                                class="invalid-feedback  form-text bg-danger rounded">Must be valid email</small>
                     </div>
                 </div>
@@ -82,6 +82,7 @@
                     <div class="col-auto">
                         <input name="age" required
                                th:field="*{age}"
+                               th:errorclass="is-invalid"
                                type="number"
                                id="inputAge"
                                class="form-control"
@@ -98,6 +99,7 @@
                     <div class="col-auto">
                         <input name="password"
                                th:field="*{password}"
+                               th:errorclass="is-invalid"
                                required minlength="5" maxlength="20"
                                type="password"
                                id="inputPassword"
@@ -117,6 +119,7 @@
                     <div class="col-auto">
                         <input name="confirmPassword"
                                th:field="*{confirmPassword}"
+                               th:errorclass="is-invalid"
                                required minlength="5" maxlength="20"
                                type="password"
                                id="inputConfirmPassword"
@@ -137,6 +140,6 @@
         </div>
     </div>
 </main>
-<th:block th:include="~{/fragments/footer}"/>
+<th:block th:insert="~{/fragments/footer}"/>
 </body>
 </html>

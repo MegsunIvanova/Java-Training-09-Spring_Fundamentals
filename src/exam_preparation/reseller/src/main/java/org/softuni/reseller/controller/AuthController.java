@@ -1,13 +1,14 @@
 package org.softuni.reseller.controller;
 
 import jakarta.validation.Valid;
+import org.softuni.reseller.model.dto.HomeModelDTO;
 import org.softuni.reseller.model.dto.UserLoginDTO;
 import org.softuni.reseller.model.dto.UserRegisterDTO;
 import org.softuni.reseller.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,9 +34,16 @@ public class AuthController {
         return new UserLoginDTO();
     }
 
+    @ModelAttribute("homeModel")
+    public HomeModelDTO initHomeModel() {
+        return new HomeModelDTO();
+    }
+
     @GetMapping("/")
     public String home() {
         if (this.userService.isUserLoggedIn()) {
+            HomeModelDTO homeModelDTO = userService.createHomeModelDTO();
+
             return "home";
         } else {
             return "index";

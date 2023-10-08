@@ -3,23 +3,22 @@ package com.example.pathfinder.service.impl;
 import com.example.pathfinder.model.User;
 import com.example.pathfinder.repository.UserRepository;
 import com.example.pathfinder.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.pathfinder.service.session.LoggedUser;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final LoggedUser loggedUser;
     private final UserRepository userRepository;
 
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(LoggedUser loggedUser, UserRepository userRepository) {
+        this.loggedUser = loggedUser;
         this.userRepository = userRepository;
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public User getLoggedUser() {
+        return this.userRepository.findByUsername(loggedUser.getUsername()).get();
     }
 }

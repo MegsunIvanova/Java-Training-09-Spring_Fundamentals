@@ -1,22 +1,20 @@
-package com.example.pathfinder.web;
+package com.example.pathfinder.controller;
 
 import com.example.pathfinder.model.User;
-import com.example.pathfinder.service.UserService;
+import com.example.pathfinder.service.RestDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
 import java.util.List;
 
 @RestController
-public class UserController {
-    private final UserService userService;
+public class RestDemoController {
+    private final RestDemoService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public RestDemoController(RestDemoService userService) {
         this.userService = userService;
     }
 
