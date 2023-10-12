@@ -3,6 +3,10 @@ package bg.softuni.mobilele.model.entity;
 import bg.softuni.mobilele.model.enums.EngineEnum;
 import bg.softuni.mobilele.model.enums.TransmissionEnum;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 
@@ -24,36 +28,45 @@ public class OfferEntity extends BaseEntity {
 //            )
 //    @Type(type = "uuid-char")
 //    @Column(columnDefinition = "VARCHAR(255)")
+
+    @NotNull
     @JdbcTypeCode(Types.VARCHAR)
     private UUID uuid;
 
+    @NotEmpty
+    @Column(nullable = false)
+    private String description;
+
+    @NotNull
+    @ManyToOne
+    private ModelEntity model;
+
+    @NotNull
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private EngineEnum engine;
 
-    @Column(name = "image_url")
-    private String imageUrl;
-
-    private Integer mileage;
-
-    @Column(nullable = false)
-    private BigDecimal price;
-
+    @NotNull
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TransmissionEnum transmission;
 
-    private int year;
+    @NotEmpty
+    @Column(name = "image_url")
+    private String imageUrl;
 
+    @Positive
+    private long mileage;
+
+    @NotNull
     @Column(nullable = false)
-    private String description;
+    private BigDecimal price;
 
-    @ManyToOne
-    private ModelEntity model;
+    @Min(1930)
+    private int year;
 
     @ManyToOne
     private UserEntity seller;
-
 
     public UUID getUuid() {
         return uuid;
@@ -73,7 +86,6 @@ public class OfferEntity extends BaseEntity {
         return this;
     }
 
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -83,11 +95,11 @@ public class OfferEntity extends BaseEntity {
         return this;
     }
 
-    public Integer getMileage() {
+    public long getMileage() {
         return mileage;
     }
 
-    public OfferEntity setMileage(Integer mileage) {
+    public OfferEntity setMileage(long mileage) {
         this.mileage = mileage;
         return this;
     }

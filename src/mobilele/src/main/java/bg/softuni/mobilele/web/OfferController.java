@@ -7,17 +7,16 @@ import bg.softuni.mobilele.service.OfferService;
 import bg.softuni.mobilele.service.impl.OfferServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.UUID;
 
 @Controller
+@RequestMapping("/offer")
 public class OfferController {
 
     private final OfferService offerService;
@@ -33,16 +32,10 @@ public class OfferController {
         return EngineEnum.values();
     }
 
-
-    @GetMapping("/offers/all")
-    public String allOffers() {
-        return "offers";
-    }
-
-    @GetMapping("/offers/add")
+    @GetMapping("/add")
     public String addOffer(Model model) {
-        if (!model.containsAttribute("addOfferModel")) {
-            model.addAttribute("addOfferModel", new CreateOfferDTO());
+        if (!model.containsAttribute("creatOfferDTO")) {
+            model.addAttribute("creatOfferDTO", CreateOfferDTO.empty());
         }
 
         model.addAttribute("brands", this.brandService.getAllBrands());
@@ -50,25 +43,26 @@ public class OfferController {
         return "offer-add";
     }
 
-    @PostMapping("/offers/add")
-    public String addOffer(@Valid CreateOfferDTO addOfferModel,
+    @PostMapping("/add")
+    public String addOffer(@Valid CreateOfferDTO creatOfferDTO,
                            BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes) {
+                           RedirectAttributes rAtt) {
 
         if (bindingResult.hasErrors()) {
-            redirectAttributes.addFlashAttribute("addOfferModel", addOfferModel);
-            redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.addOfferModel",
+            rAtt.addFlashAttribute("creatOfferDTO", creatOfferDTO);
+            rAtt.addFlashAttribute(
+                    "org.springframework.validation.BindingResult.creatOfferDTO",
                     bindingResult);
-            return "redirect:/offers/add";
+
+            return "redirect:/offer/add";
         }
 
-        this.offerService.createOffer(addOfferModel);
+        UUID newOfferUUID = this.offerService.createOffer(creatOfferDTO);
 
-        return "redirect:/offers/all";
+        return "redirect:/offer/" + newOfferUUID;
     }
 
-    @GetMapping("offers/{uuid}/details")
+    @GetMapping("/{uuid}")
     public String details(@PathVariable("uuid") UUID uuid) {
         return "details";
     }

@@ -12,6 +12,7 @@ import bg.softuni.mobilele.service.OfferService;
 import bg.softuni.mobilele.util.CurrentUser;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Service
@@ -33,23 +34,28 @@ public class OfferServiceImpl implements OfferService {
 
     @Override
     public UUID createOffer(CreateOfferDTO createOfferDTO) {
-        OfferEntity newOffer = this.offerMapper.addOfferDtoToOfferEntity(createOfferDTO);
+        OfferEntity newOffer = map(createOfferDTO);
 
-        //TODO - current user should be logged in
+        offerRepository.save(newOffer);
 
-        UserEntity userEntity = this.userRepository.findByEmail(currentUser.getEmail())
-                .orElseThrow();
+        return newOffer.getUuid();
+    }
 
-        ModelEntity modelEntity = this.modelRepository.findById(createOfferDTO.getModelId())
-                .orElseThrow();
+    private OfferEntity map(CreateOfferDTO createOfferDTO) {
+        ModelEntity modelEntity = modelRepository
+                .findById(createOfferDTO.modelId())
+                .orElseThrow(() -> new IllegalArgumentException("Model with id " + createOfferDTO.modelId() + " not found!"));
 
-        newOffer.setModel(modelEntity)
-                .setSeller(userEntity);
-
-        this.offerRepository.save(newOffer);
-
-        throw new UnsupportedOperationException("Coming soon!");
-
+        return new OfferEntity()
+                .setUuid(UUID.randomUUID())
+                .setDescription(createOfferDTO.description())
+                .setModel(modelEntity)
+                .setEngine(createOfferDTO.engine())
+                .setTransmission(createOfferDTO.transmission())
+                .setImageUrl(createOfferDTO.imageUrl())
+                .setMileage(createOfferDTO.mileage())
+                .setPrice(BigDecimal.valueOf(createOfferDTO.price()))
+                .setYear(createOfferDTO.year());
     }
 
 }

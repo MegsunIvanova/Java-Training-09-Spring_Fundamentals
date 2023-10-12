@@ -6,7 +6,8 @@ INSERT INTO brands (id, name)
 VALUES (1, 'Toyota'),
        (2, 'Ford');
 
-INSERT INTO models (id, name, category, start_year, end_year, brand_id, image_url)
-VALUES (1, 'Fiesta', 'CAR', 1976, null, 2, 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Ford_Fiesta_ST-Line_%28VII%2C_Facelift%29_%E2%80%93_f_30012023.jpg'),
-       (2, 'Escort', 'CAR', 1968, 2000, 2, 'https://upload.wikimedia.org/wikipedia/commons/e/e9/1996_Ford_Escort_RS_Cosworth_2.0_Front.jpg'),
-       (3, 'Yaris', 'CAR', 1999, null, 1, 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/2020_Toyota_Yaris_Design_HEV_CVT_1.5_Front.jpg/1200px-2020_Toyota_Yaris_Design_HEV_CVT_1.5_Front.jpg');
+INSERT INTO models (id, name, category, brand_id)
+VALUES (1, 'Camry', 'CAR', 1),
+       (2, 'Corolla', 'CAR', 1),
+       (3, 'Focus', 'CAR', 2),
+       (4, 'Fiesta', 'CAR', 2);

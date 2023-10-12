@@ -9,12 +9,12 @@ import jakarta.validation.constraints.Size;
 @FieldMatch(
         first = "password",
         second = "confirmPassword",
-        message = "Passwords do not match"
+        message = "Passwords should match."
 )
 public class UserRegisterDTO {
-    @NotEmpty(message = "User email should be provided!")
-    @Email(message = "User email should be valid!")
-    @UniqueUserEmail(message = "User email should be unique!")
+    @NotEmpty(message = "User email should be provided.")
+    @Email(message = "User email should be valid.")
+    @UniqueUserEmail
     private String email;
 
     @NotEmpty

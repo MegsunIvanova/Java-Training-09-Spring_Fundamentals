@@ -1,6 +1,8 @@
 package bg.softuni.mobilele.model.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,6 +10,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "brands")
+@NamedEntityGraph(
+        name = "brandWithModels",
+        attributeNodes = @NamedAttributeNode("models")
+)
 public class BrandEntity extends BaseEntity {
 
     @Column(nullable = false, unique = true)
@@ -19,10 +25,15 @@ public class BrandEntity extends BaseEntity {
 
     @OneToMany(
             mappedBy = "brand",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL
+            targetEntity = ModelEntity.class,
+            fetch = FetchType.LAZY
     )
-    private List<ModelEntity> models = new ArrayList<>();
+//    @Fetch(value = FetchMode.SUBSELECT)
+    private List<ModelEntity> models;
+
+    public BrandEntity() {
+        this.models = new ArrayList<>();
+    }
 
     public String getName() {
         return name;
