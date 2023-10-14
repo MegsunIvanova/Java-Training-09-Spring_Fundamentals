@@ -10,7 +10,7 @@
 
     <form class="mx-auto w-25 bg-blur rounded"
           th:method="POST"
-          th:action="@{/offer/add}"
+          th:action="@{/offers/add}"
           th:object="${addOfferDTO}">
 
         <div class="form-group">
@@ -68,6 +68,7 @@
 
     </form>
 </main>
-<footer th:replace="fragments/commons::footer"></footer>
+<footer th:replace="~{fragments/commons::footer}"></footer>
 </body>
 </html>
+<

@@ -1,12 +1,17 @@
 package org.softuni.reseller.service;
 
 import org.softuni.reseller.model.dto.AddOfferDTO;
+import org.softuni.reseller.model.dto.HomeModelDTO;
+
+import java.util.UUID;
 
 public interface OfferService {
 
-    void createOffer(AddOfferDTO addOfferDTO);
+    boolean createOffer(AddOfferDTO addOfferDTO);
 
-    void buyOffer(Long offerId);
+    void buyOffer(UUID offerId);
 
-    void removeOffer(Long id);
+    void removeOffer(UUID id);
+
+    HomeModelDTO getHomeModelDTO ();
 }

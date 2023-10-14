@@ -10,23 +10,32 @@
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
-<header>
+<header th:with="isLogged=${@loggedUser.isLogged}">
     <nav class="navbar navbar-expand-lg bg-nav rounded">
         <a class="nav-link text-primary active h5 text-stroke" href="/">Reseller App</a>
-        <a th:if="${@userSession.isLoggedIn()}" class="nav-link text-primary active h5 text-stroke" href="/offer/add">Add Offer</a>
+        <a th:if="${@loggedUser.isLogged}"
+           class="nav-link text-primary active h5 text-stroke" th:href="@{/offers/add}">Add Offer</a>
 
         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav row">
-                <li class="nav-item col-md-4" th:unless="${@userSession.isLoggedIn()}">
-                    <a class="nav-link text-primary active h5 text-stroke" href="/login">Login</a>
+                <li class="nav-item col-md-4" th:unless="${@loggedUser.isLogged}">
+                    <a class="nav-link text-primary active h5 text-stroke" th:href="@{/login}">Login</a>
                 </li>
 
-                <li class="nav-item col-md-4" th:unless="${@userSession.isLoggedIn()}">
-                    <a class="nav-link text-primary active h5 text-stroke" href="/register">Register</a>
+                <li class="nav-item col-md-4" th:unless="${@loggedUser.isLogged}">
+                    <a class="nav-link text-primary active h5 text-stroke" th:href="@{/register}">Register</a>
                 </li>
 
-                <li class="nav-item col-md-4" th:if="${@userSession.isLoggedIn()}">
-                    <a class="nav-link text-primary active h5 text-stroke" href="/logout">Logout</a>
+                <li class="nav-item col-md-4" th:if="${@loggedUser.isLogged}">
+                    <a class="nav-link text-primary active h5 text-stroke" th:href="@{/logout}">Logout</a>
+
+                    <!--                    <a class="nav-link text-primary active h5 text-stroke"-->
+                    <!--                       href="javascript: document.logoutForm.submit()"-->
+                    <!--                       role="menuitem">Logout</a>-->
+                    <!--                    <form name="logoutForm" th:action="@{/logout}" th:method="POST" th:hidden="true">-->
+                    <!--                        <input hidden type="submit" value="Logout"/>-->
+                    <!--                    </form>-->
+
                 </li>
             </ul>
         </div>

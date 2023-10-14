@@ -15,7 +15,6 @@ public class ConditionSeeder implements CommandLineRunner {
 
     private final ConditionRepository conditionRepository;
 
-    @Autowired
     public ConditionSeeder(ConditionRepository conditionRepository) {
         this.conditionRepository = conditionRepository;
     }
@@ -29,6 +28,5 @@ public class ConditionSeeder implements CommandLineRunner {
 
             this.conditionRepository.saveAll(conditions);
         }
-
     }
 }

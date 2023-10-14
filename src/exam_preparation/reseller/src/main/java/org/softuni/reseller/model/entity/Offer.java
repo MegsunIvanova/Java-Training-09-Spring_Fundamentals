@@ -1,19 +1,28 @@
 package org.softuni.reseller.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "offers")
+@NamedEntityGraph(
+        name = "offersWithUsers",
+        attributeNodes = {@NamedAttributeNode("seller"), @NamedAttributeNode("buyer")}
+)
 public class Offer extends BaseEntity {
 
+    @NotEmpty
+    @Size(min = 2, max = 50)
     @Column(nullable = false)
     private String description;
 
+    @NotNull
+    @Positive
     @Column(nullable = false)
     private BigDecimal price;
 
@@ -23,6 +32,7 @@ public class Offer extends BaseEntity {
     @ManyToOne
     private User buyer;
 
+    @NotNull
     @ManyToOne
     private Condition condition;
 

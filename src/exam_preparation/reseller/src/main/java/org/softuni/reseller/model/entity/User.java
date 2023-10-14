@@ -1,33 +1,41 @@
 package org.softuni.reseller.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
 
+    @NotEmpty
+    @Size(min=3, max = 20)
     @Column(nullable = false, unique = true)
     private String username;
 
+    @NotEmpty
     @Column(nullable = false)
     private String password;
 
+    @NotEmpty
+    @Email
     @Column(nullable = false, unique = true)
     private String email;
 
     @OneToMany(targetEntity = Offer.class, mappedBy = "seller", fetch = FetchType.EAGER)
-    private List<Offer> offers;
+    private Set<Offer> offers;
 
 
     @OneToMany(targetEntity = Offer.class, mappedBy = "buyer", fetch = FetchType.EAGER)
-    private List<Offer> boughtOffers;
+    private Set<Offer> boughtOffers;
 
     public User() {
-        this.offers = new ArrayList<>();
-        this.boughtOffers = new ArrayList<>();
+        this.offers = new HashSet<>();
+        this.boughtOffers = new HashSet<>();
     }
 
     public String getUsername() {
@@ -57,20 +65,20 @@ public class User extends BaseEntity {
         return this;
     }
 
-    public List<Offer> getOffers() {
+    public Set<Offer> getOffers() {
         return offers;
     }
 
-    public User setOffers(List<Offer> offers) {
+    public User setOffers(Set<Offer> offers) {
         this.offers = offers;
         return this;
     }
 
-    public List<Offer> getBoughtOffers() {
+    public Set<Offer> getBoughtOffers() {
         return boughtOffers;
     }
 
-    public User setBoughtOffers(List<Offer> boughtOffers) {
+    public User setBoughtOffers(Set<Offer> boughtOffers) {
         this.boughtOffers = boughtOffers;
         return this;
     }

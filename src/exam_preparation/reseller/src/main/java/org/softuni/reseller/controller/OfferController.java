@@ -7,7 +7,10 @@ import org.softuni.reseller.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.UUID;
 
 @Controller
 public class OfferController {
@@ -25,51 +28,49 @@ public class OfferController {
         return new AddOfferDTO();
     }
 
-    @GetMapping("/offer/add")
-    public String addOffer() {
+    @GetMapping("/offers/add")
+    public ModelAndView addOffer() {
         if (!this.userService.isUserLoggedIn()) {
-            return "redirect:/";
+            return new ModelAndView("redirect:/");
         }
 
-        return "/offer-add";
+        return new ModelAndView("/offer-add");
     }
 
-    @PostMapping("/offer/add")
-    public String addOffer(@Valid AddOfferDTO addOfferDTO,
-                           BindingResult bindingResult,
-                           RedirectAttributes redirectAttributes) {
+    @PostMapping("/offers/add")
+    public ModelAndView addOffer(@Valid AddOfferDTO addOfferDTO,
+                                 BindingResult bindingResult,
+                                 RedirectAttributes redirectAttributes) {
 
         if (!this.userService.isUserLoggedIn()) {
-            return "redirect:/";
+            return new ModelAndView("redirect:/");
         }
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !offerService.createOffer(addOfferDTO)) {
             redirectAttributes.addFlashAttribute("addOfferDTO", addOfferDTO);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.addOfferDTO", bindingResult);
 
-            return "redirect:/offer/add";
+            return new ModelAndView("redirect:/offers/add");
         }
 
-        this.offerService.createOffer(addOfferDTO);
-
-        return "redirect:/";
+        return new ModelAndView("redirect:/");
     }
 
-    @GetMapping("/offer/{id}/buy")
-    public String buyOffer(@PathVariable("id") Long id) {
-        if (!this.userService.isUserLoggedIn()) {
-            return "redirect:/";
+    @PostMapping("/offers/buy/{id}")
+    public ModelAndView buyOffer(@PathVariable("id") UUID id) {
+        if (!userService.isUserLoggedIn()) {
+            return new ModelAndView("redirect:/");
         }
 
-        this.offerService.buyOffer(id);
+        offerService.buyOffer(id);
 
-        return "redirect:/";
+        return new ModelAndView("redirect:/");
     }
 
 
-    @GetMapping("/offer/{id}/remove")
-    public String removeOffer(@PathVariable("id") Long id) {
+    @GetMapping("/offers/remove/{id}")
+    public String removeOffer(@PathVariable("id") UUID id) {
         if (!this.userService.isUserLoggedIn()) {
             return "redirect:/";
         }

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments/commons::head"></head>
+<head th:replace="~{fragments/commons::head}"></head>
 <body>
-<header th:replace="fragments/commons::nav"></header>
+<header th:replace="~{fragments/commons::nav}"></header>
 <main>
     <div class="container bg-blur rounded mt-5 ">
         <h1>Welcome to Reseller App</h1>
@@ -16,13 +16,13 @@
         <hr class="my-3 bg-white w-75"/>
 
         <h3>
-            <a class="text-primary" href="/login">Login</a>
+            <a class="text-primary" th:href="@{/login}">Login</a>
             if you have an account or
-            <a class="text-primary" href="/register">Register</a>
+            <a class="text-primary" th:href="@{/register}">Register</a>
             now and check our deals.
         </h3>
     </div>
 </main>
-<footer th:replace="fragments/commons::footer"></footer>
+<footer th:replace="~{fragments/commons::footer}"></footer>
 </body>
 </html>

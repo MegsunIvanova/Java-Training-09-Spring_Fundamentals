@@ -1,16 +1,20 @@
 package org.softuni.reseller.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.softuni.reseller.model.enums.ConditionNameEnum;
 
 @Entity
 @Table(name = "conditions")
 public class Condition extends BaseEntity {
 
+    @NotNull
     @Column(nullable = false, unique = true)
     @Enumerated(EnumType.STRING)
     private ConditionNameEnum name;
 
+    @NotEmpty
     @Column(nullable = false)
     private String description;
 
@@ -28,6 +32,7 @@ public class Condition extends BaseEntity {
 
     public Condition setName(ConditionNameEnum name) {
         this.name = name;
+        this.setDescription(name.getDescription());
         return this;
     }
 
@@ -35,7 +40,7 @@ public class Condition extends BaseEntity {
         return description;
     }
 
-    public Condition setDescription(String description) {
+    private Condition setDescription(String description) {
         this.description = description;
         return this;
     }

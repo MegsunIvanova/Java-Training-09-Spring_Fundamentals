@@ -1,12 +1,10 @@
 package org.softuni.reseller.model.dto;
 
-import org.softuni.reseller.model.entity.Condition;
-import org.softuni.reseller.model.entity.User;
-
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class OfferDTO {
-    private Long id;
+    private UUID id;
     private String description;
     private BigDecimal price;
     private String sellerUsername;
@@ -16,11 +14,11 @@ public class OfferDTO {
     public OfferDTO() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public OfferDTO setId(Long id) {
+    public OfferDTO setId(UUID id) {
         this.id = id;
         return this;
     }

@@ -14,7 +14,6 @@ public class AddOfferDTO {
     @Size(min=2, max = 50)
     private String description;
 
-
     @NotNull
     @Positive
     private BigDecimal price;

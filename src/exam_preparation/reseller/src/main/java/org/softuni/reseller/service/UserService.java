@@ -9,8 +9,6 @@ public interface UserService {
 
     boolean isUserLoggedIn();
 
-    HomeModelDTO createHomeModelDTO();
-
     void logout();
 
     boolean login(UserLoginDTO loginDTO);
