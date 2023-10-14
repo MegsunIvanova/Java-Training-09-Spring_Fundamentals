@@ -68,15 +68,14 @@ public class OfferController {
         return new ModelAndView("redirect:/");
     }
 
-
-    @GetMapping("/offers/remove/{id}")
-    public String removeOffer(@PathVariable("id") UUID id) {
+    @PostMapping("/offers/remove/{id}")
+    public ModelAndView removeOffer(@PathVariable("id") UUID id) {
         if (!this.userService.isUserLoggedIn()) {
-            return "redirect:/";
+            return new ModelAndView("redirect:/");
         }
 
         this.offerService.removeOffer(id);
 
-        return "redirect:/";
+        return new ModelAndView("redirect:/");
     }
 }

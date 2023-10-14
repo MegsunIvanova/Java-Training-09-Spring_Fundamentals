@@ -43,34 +43,23 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public String login(@Valid UserLoginDTO loginDTO,
-                        BindingResult bindingResult,
-                        RedirectAttributes redirectAttributes) {
+    public ModelAndView login(@Valid UserLoginDTO loginDTO,
+                              BindingResult bindingResult,
+                              RedirectAttributes redirectAttributes) {
 
         if (this.userService.isUserLoggedIn()) {
-            return "redirect:/";
+            return new ModelAndView("redirect:/");
         }
 
-        if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors() || !userService.login(loginDTO)) {
             redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.loginDTO", bindingResult);
 
-            return "redirect:/login";
+            return new ModelAndView("redirect:/login");
         }
 
-        boolean loginSuccess = this.userService.login(loginDTO);
-
-        if (!loginSuccess) {
-            bindingResult.addError(new ObjectError("loginDTO", "Wrong Credential"));
-            redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
-            redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.loginDTO", bindingResult);
-
-            return "redirect:/login";
-        }
-
-        return "redirect:/";
+        return new ModelAndView("redirect:/");
     }
 
     @GetMapping("/register")
@@ -103,7 +92,7 @@ public class AuthController {
         return new ModelAndView("redirect:/login");
     }
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public ModelAndView logout() {
         if (this.userService.isUserLoggedIn()) {
             this.userService.logout();

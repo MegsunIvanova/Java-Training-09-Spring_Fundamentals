@@ -22,8 +22,10 @@
                                 <td style="width: 5%" class="bg-info" th:text="${item.conditionName}">{condition}</td>
                                 <td class="bg-primary" style="width: 15%" th:text="${item.price}">{price} €</td>
                                 <td th:text="${item.description}">{description}</td>
-                                <td style="width: 15%"><a class="btn-danger btn"
-                                                          th:href="@{/offers/remove/{id}(id=${item.id})}">Remove</a>
+                                <td style="width: 15%">
+                                    <form th:action="@{/offers/remove/{id}(id=${item.id})}" th:method="POST">
+                                        <button class="btn-danger btn" type="submit" th:method="POST">Remove</button>
+                                    </form>
                                 </td>
                             </tr>
                         </table>

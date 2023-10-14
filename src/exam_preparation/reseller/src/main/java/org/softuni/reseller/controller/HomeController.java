@@ -18,7 +18,6 @@ public class HomeController {
         this.offerService = offerService;
     }
 
-
     @GetMapping("/")
     public ModelAndView home() {
         if (this.userService.isUserLoggedIn()) {
