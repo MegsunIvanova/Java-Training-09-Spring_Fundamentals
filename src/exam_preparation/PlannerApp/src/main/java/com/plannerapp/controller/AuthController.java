@@ -33,13 +33,22 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
+        if (userService.hasLoggedUser()) {
+            return "redirect:/";
+        }
+
         return "login";
+
     }
 
     @PostMapping("/login")
     public String login(@Valid UserLoginDTO loginDTO,
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes) {
+
+        if (userService.hasLoggedUser()) {
+            return "redirect:/";
+        }
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
@@ -56,6 +65,10 @@ public class AuthController {
 
     @GetMapping("/register")
     public String register() {
+        if (userService.hasLoggedUser()) {
+            return "redirect:/";
+        }
+
         return "register";
     }
 
@@ -63,6 +76,10 @@ public class AuthController {
     public String register(@Valid UserRegisterDTO registerDTO,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
+
+        if (userService.hasLoggedUser()) {
+            return "redirect:/";
+        }
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("registerDTO", registerDTO);
@@ -78,8 +95,12 @@ public class AuthController {
     }
 
 
-    @GetMapping("/logout")
+    @PostMapping("/logout")
     public String logout() {
+        if (!userService.hasLoggedUser()) {
+            return "redirect:/";
+        }
+
         userService.logout();
         return "redirect:/";
     }

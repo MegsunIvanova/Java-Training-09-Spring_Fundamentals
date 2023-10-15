@@ -6,6 +6,10 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
+@NamedEntityGraph(
+        name = "userWithTasks",
+        attributeNodes = @NamedAttributeNode("assignedTasks")
+)
 public class User extends BaseEntity {
 
     @Column(unique = true, nullable = false)
@@ -57,6 +61,17 @@ public class User extends BaseEntity {
 
     public User setAssignedTasks(List<Task> assignedTasks) {
         this.assignedTasks = assignedTasks;
+        return this;
+    }
+
+
+    public User assignTask(Task task) {
+        this.assignedTasks.add(task);
+        return this;
+    }
+
+    public User removeTask(Task task) {
+        this.assignedTasks.remove(task);
         return this;
     }
 }

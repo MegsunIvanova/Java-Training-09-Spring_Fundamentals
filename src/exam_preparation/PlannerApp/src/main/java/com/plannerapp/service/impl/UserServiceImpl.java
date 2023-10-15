@@ -88,7 +88,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public List<TaskDTO> getAssignedTasks() {
-        User loggedUser = this.userRepository
+        User loggedUser = userRepository
                 .findByUsername(this.loggedUser.getUsername())
                 .orElseThrow();
 

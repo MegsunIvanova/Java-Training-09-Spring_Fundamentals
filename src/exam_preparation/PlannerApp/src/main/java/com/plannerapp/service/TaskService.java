@@ -9,4 +9,10 @@ public interface TaskService {
     void addTask(AddTaskDTO addTaskDTO);
 
     List<TaskDTO> getAvailableTasks();
+
+    void assign(Long id);
+
+    void remove(Long id);
+
+    void returnTask(Long id);
 }
