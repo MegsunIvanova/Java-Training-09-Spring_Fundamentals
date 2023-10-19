@@ -21,15 +21,9 @@ public class PrioritySeeder implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         if (priorityRepository.count() == 0) {
-           priorityRepository.saveAll(Arrays.stream(PriorityName.values())
-                    .map(this::mapToPriority)
+            priorityRepository.saveAll(Arrays.stream(PriorityName.values())
+                    .map(Priority::new)
                     .collect(Collectors.toList()));
         }
-    }
-
-    private Priority mapToPriority(PriorityName nameEnum) {
-        return new Priority()
-                .setName(nameEnum)
-                .setDescription(nameEnum.getDescription());
     }
 }

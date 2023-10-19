@@ -1,10 +1,12 @@
-package com.plannerapp.controller;
+package com.example.spotifyplaylistapp.controller;
 
-import com.plannerapp.model.dto.UserLoginDTO;
-import com.plannerapp.model.dto.UserRegisterDTO;
-import com.plannerapp.service.UserService;
+import com.example.spotifyplaylistapp.model.dto.UserLoginDTO;
+import com.example.spotifyplaylistapp.model.dto.UserRegisterDTO;
+import com.example.spotifyplaylistapp.service.AuthService;
+import com.example.spotifyplaylistapp.service.LoggedUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,11 +16,12 @@ import javax.validation.Valid;
 
 @Controller
 public class AuthController {
+    private final LoggedUser loggedUser;
+    private final AuthService authService;
 
-    private final UserService userService;
-
-    public AuthController(UserService userService) {
-        this.userService = userService;
+    public AuthController(LoggedUser loggedUser, AuthService authService) {
+        this.loggedUser = loggedUser;
+        this.authService = authService;
     }
 
     @ModelAttribute("registerDTO")
@@ -33,7 +36,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        if (userService.hasLoggedUser()) {
+        if (loggedUser.isLogged()) {
             return "redirect:/";
         }
 
@@ -44,9 +47,19 @@ public class AuthController {
     public String login(@Valid UserLoginDTO loginDTO,
                         BindingResult bindingResult,
                         RedirectAttributes redirectAttributes) {
-
-        if (userService.hasLoggedUser()) {
+        if (loggedUser.isLogged()) {
             return "redirect:/";
+        }
+
+        boolean loginSuccess = false;
+
+        if (!bindingResult.hasErrors()) {
+            loginSuccess = authService.login(loginDTO);
+            if (!loginSuccess) {
+                bindingResult.addError(
+                        new ObjectError("loginDTO", "Incorrect username or password.")
+                );
+            }
         }
 
         if (bindingResult.hasErrors()) {
@@ -57,14 +70,12 @@ public class AuthController {
             return "redirect:/login";
         }
 
-        userService.login(loginDTO);
-
         return "redirect:/";
     }
 
     @GetMapping("/register")
     public String register() {
-        if (userService.hasLoggedUser()) {
+        if (loggedUser.isLogged()) {
             return "redirect:/";
         }
 
@@ -75,8 +86,7 @@ public class AuthController {
     public String register(@Valid UserRegisterDTO registerDTO,
                            BindingResult bindingResult,
                            RedirectAttributes redirectAttributes) {
-
-        if (userService.hasLoggedUser()) {
+        if (loggedUser.isLogged()) {
             return "redirect:/";
         }
 
@@ -88,19 +98,19 @@ public class AuthController {
             return "redirect:/register";
         }
 
-        userService.register(registerDTO);
-
-        return "redirect:/";
+        authService.register(registerDTO);
+        return "redirect:/login";
     }
-
 
     @PostMapping("/logout")
     public String logout() {
-        if (!userService.hasLoggedUser()) {
+        if (!loggedUser.isLogged()) {
             return "redirect:/";
         }
 
-        userService.logout();
+        authService.logout();
+
         return "redirect:/";
     }
+
 }

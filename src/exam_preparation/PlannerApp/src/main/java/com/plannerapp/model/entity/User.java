@@ -63,8 +63,6 @@ public class User extends BaseEntity {
         this.assignedTasks = assignedTasks;
         return this;
     }
-
-
     public User assignTask(Task task) {
         this.assignedTasks.add(task);
         return this;

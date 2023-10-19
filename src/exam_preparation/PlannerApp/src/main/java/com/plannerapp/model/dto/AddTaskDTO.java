@@ -12,15 +12,16 @@ import java.time.LocalDate;
 
 public class AddTaskDTO {
 
-    @NotEmpty
-    @Size(min=2, max = 50)
+    @NotEmpty (message = "Description cannot be empty!")
+    @Size(min=2, max = 50, message = "Description length must be between 2 and 50 characters!")
     private String description;
 
-    @Future
+    @Future (message = "Due date must be in future!")
+    @NotNull(message = "Due date cannot be null!")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dueDate;
 
-    @NotNull
+    @NotNull(message = "You must select priority!")
     private PriorityName priority;
 
     public AddTaskDTO() {

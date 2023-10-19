@@ -80,30 +80,6 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    @Transactional
-    public void remove(Long id) {
-        String username = loggedUser.getUsername();
-        Optional<User> userOpt = userRepository.findUserByUsernameWithTasks(username);
-
-        if (userOpt.isEmpty()) {
-            return;
-        }
-
-        Optional<Task> taskOpt = taskRepository.findTaskByIdAndUser(id, userOpt.get());
-
-        if (taskOpt.isEmpty()) {
-            return;
-        }
-
-        Task taskToRemove = taskOpt.get();
-
-        User user = userOpt.get().removeTask(taskToRemove);
-
-        taskRepository.delete(taskToRemove);
-        userRepository.save(user);
-    }
-
-    @Override
     public void returnTask(Long id) {
         String username = loggedUser.getUsername();
         Optional<User> userOpt = userRepository.findUserByUsernameWithTasks(username);
@@ -123,5 +99,11 @@ public class TaskServiceImpl implements TaskService {
 
         taskRepository.save(task);
         userRepository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void remove(Long id) {
+        taskRepository.deleteById(id);
     }
 }
