@@ -1,8 +1,9 @@
 package com.example.pathfinder.service.impl;
 
+import com.example.pathfinder.exeptions.UserNotFoundException;
 import com.example.pathfinder.model.User;
-import com.example.pathfinder.model.dto.UserLoginDTO;
-import com.example.pathfinder.model.dto.UserRegistrationDTO;
+import com.example.pathfinder.model.dto.binding.UserLoginDTO;
+import com.example.pathfinder.model.dto.binding.UserRegistrationDTO;
 import com.example.pathfinder.repository.UserRepository;
 import com.example.pathfinder.service.AuthService;
 import com.example.pathfinder.service.session.LoggedUser;
@@ -30,52 +31,23 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void register(UserRegistrationDTO registrationDTO) {
-//        if (!registrationDTO.getPassword().equals(registrationDTO.getConfirmPassword())) {
-//            throw new RuntimeException("password.match");
-//        }
-//
-//        Optional<User> byEmail = this.userRepository.findByEmail(registrationDTO.getEmail());
-//
-//        if (byEmail.isPresent()) {
-//            throw new RuntimeException("email.used");
-//        }
-//
-//        Optional<User> byUsername = this.userRepository.findByUsername(registrationDTO.getUsername());
-//
-//
-//        if (byUsername.isPresent()) {
-//            throw new RuntimeException("username.used");
-//        }
-
         User user = modelMapper.map(registrationDTO, User.class);
         user.setPassword(passwordEncoder.encode(registrationDTO.getPassword()));
-
-//        User user = modelMapper.map(registrationDTO, User.class);
-
-//        User user = new User(
-//                registrationDTO.username(),
-//                registrationDTO.password(),
-//                registrationDTO.fullName(),
-//                registrationDTO.age(),
-//                registrationDTO.email()
-//        );
-
         this.userRepository.save(user);
-
     }
 
     @Override
     public boolean login(UserLoginDTO loginDTO) {
         String username = loginDTO.getUsername();
 
-        User user = this.userRepository.findByUsername(loginDTO.getUsername())
-                .orElseThrow(() -> new IllegalArgumentException("User with that username: " +
+        User user = this.userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserNotFoundException("User with that username: " +
                         username + " is not present"));
 
         boolean passwordMatch = passwordEncoder.matches(loginDTO.getPassword(), user.getPassword());
 
         if (!passwordMatch) {
-            throw new IllegalArgumentException("User entered incorrect password");
+            throw new UserNotFoundException("User entered incorrect password");
         }
 
         loggedUser.setUsername(user.getUsername())

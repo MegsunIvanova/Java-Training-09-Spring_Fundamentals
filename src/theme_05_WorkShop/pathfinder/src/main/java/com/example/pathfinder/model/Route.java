@@ -22,13 +22,17 @@ public class Route {
     @Enumerated(EnumType.STRING)
     private Level level;
 
+    @Column(nullable = false)
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "video_url")
     private String videoUrl;
+
+//    @Column(name = "image_url")
+//    private String imageUrl;
 
     @ManyToOne
     private User author;
@@ -141,4 +145,18 @@ public class Route {
     public void addCategories(Set<Category> categories) {
         this.categories.addAll(categories);
     }
+
+    public Route setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+//    public String getImageUrl() {
+//        return imageUrl;
+//    }
+//
+//    public Route setImageUrl(String imageUrl) {
+//        this.imageUrl = imageUrl;
+//        return this;
+//    }
 }

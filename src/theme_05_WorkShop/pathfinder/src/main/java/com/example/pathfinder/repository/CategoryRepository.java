@@ -1,7 +1,7 @@
 package com.example.pathfinder.repository;
 
 import com.example.pathfinder.model.Category;
-import com.example.pathfinder.model.enums.RouteCategory;
+import com.example.pathfinder.model.enums.CategoryName;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,9 +11,10 @@ import java.util.Set;
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
 
-    Optional<Category> findByName(RouteCategory name);
+    Optional<Category> findByName(CategoryName name);
 
-    Category findFirstByName(RouteCategory name);
+    Category findFirstByName(CategoryName name);
 
-    Set <Category> findByNameIn(Set<RouteCategory> names);
+    Set <Category> findAllByNameIn(Set<CategoryName> names);
+
 }

@@ -1,6 +1,6 @@
 package com.example.pathfinder.model;
 
-import com.example.pathfinder.model.enums.RouteCategory;
+import com.example.pathfinder.model.enums.CategoryName;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +13,7 @@ public class Category {
 
     @Column(nullable = false, unique = true)
     @Enumerated(EnumType.STRING)
-    private RouteCategory name;
+    private CategoryName name;
 
 //    @Lob
     @Column(columnDefinition = "TEXT")
@@ -31,11 +31,11 @@ public class Category {
         return this;
     }
 
-    public RouteCategory getName() {
+    public CategoryName getName() {
         return name;
     }
 
-    public Category setName(RouteCategory name) {
+    public Category setName(CategoryName name) {
         this.name = name;
         return this;
     }

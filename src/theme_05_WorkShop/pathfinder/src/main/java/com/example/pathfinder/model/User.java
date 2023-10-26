@@ -126,4 +126,9 @@ public class User implements Serializable {
         this.age = age;
         return this;
     }
+
+    public User setId(Long id) {
+        this.id = id;
+        return this;
+    }
 }
