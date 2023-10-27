@@ -1,4 +1,4 @@
-# Лекция Spring Essentials
+# Лекция Thymeleaf
 
 1. Какво представлява Thymeleaf engine?
     - програма, която ни позволява да обработваме HTML templates, css и текстови файлове, 
@@ -8,7 +8,7 @@
 2. Какви алтернати на Thymeleaf познавате?
    - GSP, Groovy Template
 
-3. Каквп добавя Spring към Thymeleaf?
+3. Какво добавя Spring към Thymeleaf?
    - парсване на spelt expression, th:field и др.
 
 4. Как се реализират if-else statement в Thymeleaf?
@@ -24,16 +24,3 @@
 7. Как се изкарва повтаряем markup в Thymeleaf?
    - с фрагменти
 
-8. Какво представляват е Thymeleaf фрагментите?
-
-9. Защо използваме link expressions?
-
-10. Обяснете за какво служи @Primary анотацията.
-
-11. Какво е Same Origin и CORS?
-
-12. С коя анотажия управляваме CORS?
-
-13. Пример за употреба на CORS.
-
-14. какво се използва @ModelAttribute върху метод?
